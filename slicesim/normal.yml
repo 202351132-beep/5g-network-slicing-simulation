@@ -1,0 +1,155 @@
+settings:
+  simulation_time: 100
+  num_clients: 1000
+  limit_closest_base_stations: 7
+  statistics_params:
+    warmup_ratio: 0.05
+    cooldown_ratio: 0.05
+    # Statistic collection will be in this area of the coordinate system
+    x:
+      min: 0
+      max: 1980
+    y:
+      min: 0
+      max: 1980
+  logging: False
+  log_file: output.txt
+  
+  plotting_params:
+    plotting: True # plot the statistics after execution
+    plot_save: True # save plot as image
+    plot_show: True # show plot after execution
+    plot_file: normal.png # name of the plot image
+    plot_file_dpi: 1000 # dots per inch for plot image
+    scatter_size: 15  
+  
+slices:
+  embb:
+    delay_tolerance: 2000
+    qos_class: 4
+    bandwidth_guaranteed: 1000
+    bandwidth_max: 50000000
+    client_weight: 0.5
+    threshold: 0.87
+    usage_pattern:
+      distribution: randint # distribution name
+      params: # distribution parameters
+        - 4000000 # min value for this example
+        - 800000000 # max value for this example
+  mmtc:
+    delay_tolerance: 50
+    qos_class: 3
+    bandwidth_guaranteed: 5
+    bandwidth_max: 10000000
+    client_weight: 0.4
+    threshold: 0.8
+    usage_pattern:
+      distribution: randint # distribution name
+      params: # distribution parameters
+        - 4000000 # min value for this example
+        - 800000000 # max value for this example
+  urllc:
+    delay_tolerance: 10
+    qos_class: 2
+    bandwidth_guaranteed: 10
+    bandwidth_max: 10000000
+    client_weight: 0.1
+    threshold: 0.8
+    usage_pattern:
+      distribution: randint # distribution name
+      params: # distribution parameters
+        - 4000000 # min value for this example
+        - 800000000 # max value for this example
+base_stations:
+  - x: 0
+    y: 0
+    coverage: 600
+    capacity_bandwidth: 1000000
+    ratios:
+      embb: 0.60
+      mmtc: 0.30
+      urllc: 0.10
+  - x: 1000
+    y: 500
+    coverage: 700
+    capacity_bandwidth: 1400000
+    ratios:
+      embb: 0.80
+      mmtc: 0.15
+      urllc: 0.05
+  - x: -500
+    y: -500
+    coverage: 500
+    capacity_bandwidth: 700000
+    ratios:
+      embb: 0.76
+      mmtc: 0.18
+      urllc: 0.06
+  - x: -750
+    y: 850
+    coverage: 800
+    capacity_bandwidth: 1200000
+    ratios:
+      embb: 0.90
+      mmtc: 0.07
+      urllc: 0.03
+  - x: 450
+    y: -950
+    coverage: 900
+    capacity_bandwidth: 1000000
+    ratios:
+      embb: 0.80
+      mmtc: 0.15
+      urllc: 0.05
+  - x: -1300
+    y: -1300
+    coverage: 400
+    capacity_bandwidth: 120000
+    ratios:
+      embb: 0.99
+      mmtc: 0.01
+      urllc: 0.01
+  - x: 1100
+    y: 1300
+    coverage: 357
+    capacity_bandwidth: 100000
+    ratios:
+      embb: 0.50
+      mmtc: 0.30
+      urllc: 0.20
+mobility_patterns:
+  normal_btw_0_1000:
+    distribution: normal
+    params:
+      - 0
+      - 1
+    client_weight: 0.5
+  basic:
+    distribution: randint
+    params:
+      - -1
+      - 1
+    client_weight: 0.5
+clients:
+  location:
+    x:
+      distribution: normal
+      params:
+        - 0
+        - 600
+    y:
+      distribution: normal
+      params:
+        - 0
+        - 600
+  usage:
+    distribution: randint
+    params:
+      - 0
+      - 100000
+  usage_frequency:
+    distribution: randint
+    params:
+      - 0
+      - 100000
+    divide_scale: 1000000
