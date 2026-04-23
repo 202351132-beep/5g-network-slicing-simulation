@@ -1,1 +1,0 @@
-# 5g-network-slicing-simulation
